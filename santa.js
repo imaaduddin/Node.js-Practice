@@ -26,3 +26,21 @@ function question1() {
 
 
 // 2 - when does Santa first enter the basement 
+function question2() {
+  fs.readFile("./santa.txt", (err, data) => {
+    const directions = data.toString();
+    const directionsArray = direction.split("");
+    let accumulator = 0;
+    let counter = 0;
+    const answer = directionsArray.some((currentValue) => {
+      if (currentValue === "(") {
+        accumulator += 1;
+      } else if (currentValue === ")") {
+        accumulator -= 1;
+      }
+      counter ++;
+      return accumulator < 0;
+    })
+    console.log("basement entered at: ", counter);
+  })
+}
